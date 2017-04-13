@@ -1,1 +1,5 @@
-
+Disscusing the name: Iyer, Hari; Singh, Pankaj; Yang, Tingyeu; Yang, Mingfei;
+Architecture design: Iyer, Hari; Singh, Pankaj; Yang, Tingyeu; Yang, Mingfei;
+Grammar design: Yang, Tingyeu; Yang, Mingfei;
+Introduction to paser/interpreter: Iyer, Hari;
+Data structrue for parser/interpreter: Singh, Pankaj;
