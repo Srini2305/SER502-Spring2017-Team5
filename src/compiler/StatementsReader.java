@@ -15,7 +15,7 @@ import java.util.List;
  *
  */
 public class StatementsReader {
-	String pathName="/Users/pankajsingh/education/Datastructures/ser502Compiler/intermediateCode/";
+	String pathName="/Users/pankajsingh/education/spring2017/ser502Compiler /SER502-Spring2017-Team5/intermediateCode/";
 	String fileName="AssnStmnts.txt";
 	public String getPathName() {
 		return pathName;

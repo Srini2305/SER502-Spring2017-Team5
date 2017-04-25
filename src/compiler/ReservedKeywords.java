@@ -26,9 +26,14 @@ public class ReservedKeywords {
 		operations.add("END");
 		operations.add("ASSN");
 		operations.add("DEC");
-//		operations.add("");
-//		operations.add();
-//		operations.add();
+		
+		//Arithmetic Operations
+		
+		operations.add("ADD");
+		operations.add("SUB");
+		operations.add("MUL");
+		operations.add("DIV");
+		operations.add("MOD");
 		
 		//Adding reserved Words
 		reservWords.add("INT");
@@ -92,6 +97,27 @@ public class ReservedKeywords {
 	public static void setBool(String var, boolean value)
 	{
 		 boolSymbols.put(var,value);
+	}
+	public static boolean getBoolValue(String val) {
+		// TODO Auto-generated method stub
+		if(ReservedKeywords.isBool(val))
+		{
+			return ReservedKeywords.getBool(val);
+		}
+			return Boolean.parseBoolean(val);
+			
+		
+	}
+
+	public static int getINTValue(String var)
+	{
+		if(ReservedKeywords.isINT(var))
+		{
+			return ReservedKeywords.getINT(var);
+		}
+			return Integer.parseInt(var);
+			
+		
 	}
 	
 

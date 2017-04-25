@@ -13,10 +13,13 @@ import java.util.List;
 public class StatementsExecutor {
 	List<String> statements;
 	DeclarativeOperations dec;
+	ArithemeticOperations ariOps;
 	public StatementsExecutor(List<String> statements)
 	{
 		this.statements=statements;
 		dec=new DeclarativeOperations();
+		ariOps=new ArithemeticOperations();
+		
 	}
 	public List<String> generateOutput()
 	{
@@ -45,9 +48,21 @@ public class StatementsExecutor {
 				case "DEC": dec.executeDec(smt);
 								break;
 				case "ASSN": dec.assignValue(smt);
-								break;				
+								break;	
 								
-			//Arithmetic Statements					
+								
+			//Arithmetic Statements	
+								
+				case "ADD": ariOps.executeADD(smt);
+							break;	
+				case "SUB": ariOps.executeSUB(smt);
+							break;	
+				case "MUL": ariOps.executeMUL(smt);
+							break;	
+				case "DIV": ariOps.executeDIV(smt);
+							break;
+				case "MOD": ariOps.executeMOD(smt);
+							break;	
 													
 			}
 

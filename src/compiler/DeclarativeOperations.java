@@ -70,37 +70,17 @@ public class DeclarativeOperations {
 		if(ReservedKeywords.isINT(var))
 		{
 			String val=smt.getOp2();
-			int value=getINTValue(val);
+			int value=ReservedKeywords.getINTValue(val);
 			ReservedKeywords.setINT(var, value);
 		}
 		else
 			if(ReservedKeywords.isBool(var))
 			{
 				String val=smt.getOp2();
-				boolean value=getBoolValue(val);
+				boolean value=ReservedKeywords.getBoolValue(val);
 				ReservedKeywords.setBool(var, value);
 			}
 	}
-	private boolean getBoolValue(String val) {
-		// TODO Auto-generated method stub
-		if(ReservedKeywords.isBool(val))
-		{
-			return ReservedKeywords.getBool(val);
-		}
-			return Boolean.parseBoolean(val);
-			
-		
-	}
-
-	public int getINTValue(String var)
-	{
-		if(ReservedKeywords.isINT(var))
-		{
-			return ReservedKeywords.getINT(var);
-		}
-			return Integer.parseInt(var);
-			
-		
-	}
+	
 
 }
