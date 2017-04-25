@@ -1,0 +1,6 @@
+0 START
+1 BEGIN            
+2 DEC a INT             
+3 PRINT a
+4 END
+5 STOP    

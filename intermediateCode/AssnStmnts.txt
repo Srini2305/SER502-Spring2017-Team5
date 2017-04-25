@@ -1,0 +1,10 @@
+0 START
+1 BEGIN            
+2 DEC a INT 
+3 DEC a INT 
+4 ASSN a 10  
+5 ASSN b a          
+6 PRINT a
+7 PRINT b
+8 END
+9 STOP    

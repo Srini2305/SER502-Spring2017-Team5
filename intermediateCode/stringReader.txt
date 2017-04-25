@@ -1,0 +1,8 @@
+0 START
+1 BEGIN            
+2 DEC a INT      
+3 ASSN a 1
+4 DEC evensum INT
+5 ASSN evensum 1
+6 DEC oddsum INT
+7 ASSN oddsum 1      
