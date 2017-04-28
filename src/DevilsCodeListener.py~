@@ -187,8 +187,8 @@ class DevilsCodeListener(ParseTreeListener):
                 Temp1.setFlag(True)
                 writeStr += (Temp1.getName() + ' ')
             else:
-                Temp2.setFlag(True)
-                writeStr += (Temp2.getName() + ' ')
+                Temp1.setFlag(True)
+                writeStr += (Temp1.getName() + ' ')
         # Else lOperand is IDENT or Number
         else:
             writeStr += (lOperand + ' ')

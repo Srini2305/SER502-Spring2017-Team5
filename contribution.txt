@@ -1,0 +1,32 @@
+Contribution Text File
+
+/********************************************/
+
+Spring 2017 - Team 5
+Hari Iyer
+Pankaj Singh
+Ting Yeu Yang
+Mingfei Yang
+
+/********************************************/
+
+Hari Iyer
+
+
+/********************************************/
+
+Pankaj Singh
+
+
+/********************************************/
+
+Ting Yeu Yang
+
+
+/********************************************/
+
+Mingfei Yang
+1. Assist the grammar design
+2. Assist the Antlr Grammar File convertion
+3. Generate the intermediate code
+
