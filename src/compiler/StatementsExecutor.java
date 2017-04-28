@@ -14,6 +14,7 @@ public class StatementsExecutor {
 	List<String> statements;
 	DeclarativeOperations dec;
 	ArithemeticOperations ariOps;
+	int index;
 	public StatementsExecutor(List<String> statements)
 	{
 		this.statements=statements;
@@ -26,10 +27,11 @@ public class StatementsExecutor {
 		List<String> output=new ArrayList<String>();
 		int len=statements.size();
 		Statement smt=new Statement();
-		for(int i=0;i<len;i++)
+		boolean branching=false;
+		for( index=0;index<len;index++)
 		{
 			try {
-				smt.createStatement(statements.get(i));
+				smt.createStatement(statements.get(index));
 			
 			switch(smt.getOperation())
 			{
@@ -63,7 +65,41 @@ public class StatementsExecutor {
 							break;
 				case "MOD": ariOps.executeMOD(smt);
 							break;	
-													
+				//boolean operations
+				case "AND": ariOps.executeAND(smt);
+							break;
+				case "OR": ariOps.executeOR(smt);
+							break;				
+				//boolean operations
+				case "SML": ariOps.executeSML(smt);
+							skipGOTO(branching);
+							break;
+				case "EQL": ariOps.executeEQL(smt);
+							skipGOTO(branching);
+							break;	
+				case "GRT": ariOps.executeGRT(smt);
+							skipGOTO(branching);
+							break;	
+				case "SMLEQL": ariOps.executeSMLEQL(smt);
+							skipGOTO(branching);
+							break;		
+				case "GRTEQL": ariOps.executeGRTEQL(smt);
+							skipGOTO(branching);
+							break;	
+				case "NOTEQL": ariOps.executeNOTEQL(smt);
+							skipGOTO(branching);
+							break;
+				//branching statements
+				case "IF" :	branching =true;
+							break;
+				case "LOOP" :branching =true;
+							break;	
+				case "GOTO" ://implement GOTO
+							int i=ariOps.executeGOTO(statements,smt);
+							index=i-1;
+							//branching =true;
+							break;				
+							
 			}
 
 			} catch (Exception e) {
@@ -74,10 +110,11 @@ public class StatementsExecutor {
 		}
 		return output;
 	}
-	private String[] getTokens(String string) {
-		//if line number is included
-
-		return null;
+	private void skipGOTO(boolean branching)
+	{
+		if(branching&&ReservedKeywords.getBool(ReservedKeywords.topb))
+			index++;//skip GOTO statement
 	}
+	
 
 }

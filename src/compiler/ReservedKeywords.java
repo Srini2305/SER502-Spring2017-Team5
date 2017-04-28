@@ -17,6 +17,10 @@ public class ReservedKeywords {
 	private static Set<String> reservWords=new HashSet<String>();
 	private static Map<String,Integer> intSymbols=new HashMap<String,Integer>();
 	private static Map<String,Boolean> boolSymbols=new HashMap<String,Boolean>();
+	private static String keyINT="INT";
+	private static String keyBOOL="BOOL";
+	public static String top="TOP";
+	public static String topb="TOPB";
 	public static void init()
 	{
 		operations.add("START");
@@ -34,6 +38,24 @@ public class ReservedKeywords {
 		operations.add("MUL");
 		operations.add("DIV");
 		operations.add("MOD");
+		
+		//Adding boolean operators
+		operations.add("AND");
+		operations.add("OR");
+		
+		//Adding comparison operators
+		operations.add("EQL");
+		operations.add("SML");
+		operations.add("GRT");
+		operations.add("SMLEQL");
+		operations.add("GRTEQL");
+		operations.add("NOTEQL");
+		
+		//Adding branching statements
+		operations.add("IF");
+		operations.add("ELSE");
+		operations.add("LOOP");
+		operations.add("GOTO");
 		
 		//Adding reserved Words
 		reservWords.add("INT");
@@ -53,11 +75,11 @@ public class ReservedKeywords {
 		{
 			throw new Exception("Variable "+var+" is already declared");
 		}
-		if("INT".equals(type))
+		if(keyINT.equals(type))
 		{
 			intSymbols.put(var, 0);
 		}
-		else if("BOOL".equals(type))
+		else if(keyBOOL.equals(type))
 		{
 			boolSymbols.put(var,false);
 		}
