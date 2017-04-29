@@ -1,0 +1,9 @@
+#!/bin/bash
+
+PATH=~/devils/src/compiler
+
+PYTHON_PATH=/usr/bin
+
+fileName=$1
+
+$PYTHON_PATH/python2 $PATH/DevilsCompiler.py $fileName
