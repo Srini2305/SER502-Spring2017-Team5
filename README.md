@@ -1,4 +1,4 @@
-## Instruction
+## Introduction
 Semester project for SER 502
 
 ## Development Environment
@@ -24,7 +24,7 @@ Steps:
 Bug information:
 1. Go to antlr4 dirctory, usually "~/.local/lib/python3.5/site-packages/antlr4"
 
-2. Access ParserRuleContext.py
+2. Open ParserRuleContext.py with text editor
 
 3. In line 116, modify the if-statment "if len(self.children)>=i" to "if len(self.children)>i" 
 
