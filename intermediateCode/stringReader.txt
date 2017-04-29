@@ -2,7 +2,11 @@
 1 BEGIN            
 2 DEC a INT      
 3 ASSN a 1
-4 DEC evensum INT
-5 ASSN evensum 1
-6 DEC oddsum INT
-7 ASSN oddsum 1      
+4 DEC b INT 
+5 DEC c INT     
+6 ASSN b 2 
+7 ADD a b
+8 ASSN c TOP
+9 PRINT c
+10 END
+11 STOP

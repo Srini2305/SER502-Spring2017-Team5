@@ -49,8 +49,7 @@ public class DeclarativeOperations {
 				val=ReservedKeywords.getINT(val)+"";
 			else if(ReservedKeywords.isBool(val))
 				val=ReservedKeywords.getBool(val)+"";
-			else 
-				throw new Exception("Variable"+val+" is not found");
+			
 		}
 		return val;
 

@@ -28,6 +28,7 @@ public class StatementsExecutor {
 		int len=statements.size();
 		Statement smt=new Statement();
 		boolean branching=false;
+		boolean gotoSkipped=false;
 		for( index=0;index<len;index++)
 		{
 			try {
@@ -72,31 +73,34 @@ public class StatementsExecutor {
 							break;				
 				//boolean operations
 				case "SML": ariOps.executeSML(smt);
-							skipGOTO(branching);
+							gotoSkipped=skipGOTO(branching);
 							break;
 				case "EQL": ariOps.executeEQL(smt);
-							skipGOTO(branching);
+							gotoSkipped=skipGOTO(branching);
 							break;	
 				case "GRT": ariOps.executeGRT(smt);
-							skipGOTO(branching);
+							gotoSkipped=skipGOTO(branching);
 							break;	
 				case "SMLEQL": ariOps.executeSMLEQL(smt);
-							skipGOTO(branching);
+							gotoSkipped=skipGOTO(branching);
 							break;		
 				case "GRTEQL": ariOps.executeGRTEQL(smt);
-							skipGOTO(branching);
+							gotoSkipped=skipGOTO(branching);
 							break;	
 				case "NOTEQL": ariOps.executeNOTEQL(smt);
-							skipGOTO(branching);
+							gotoSkipped=skipGOTO(branching);
 							break;
 				//branching statements
 				case "IF" :	branching =true;
 							break;
+				case "ELSE" :	if(branching&&!gotoSkipped)
+								index++;//skip GOTO statement
+							break;			
 				case "LOOP" :branching =true;
 							break;	
 				case "GOTO" ://implement GOTO
 							int i=ariOps.executeGOTO(statements,smt);
-							index=i-1;
+							index=i;//i-1;
 							//branching =true;
 							break;				
 							
@@ -110,10 +114,14 @@ public class StatementsExecutor {
 		}
 		return output;
 	}
-	private void skipGOTO(boolean branching)
+	private boolean skipGOTO(boolean branching)
 	{
-		if(branching&&ReservedKeywords.getBool(ReservedKeywords.topb))
+		if(branching&&ReservedKeywords.getTopb())
+		{
 			index++;//skip GOTO statement
+			return true;
+		}
+		return false;
 	}
 	
 

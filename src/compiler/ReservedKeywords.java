@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 /**
  * @author pankajsingh
@@ -15,12 +16,14 @@ import java.util.Set;
 public class ReservedKeywords {
 	private static Set<String> operations=new HashSet<String>();
 	private static Set<String> reservWords=new HashSet<String>();
+	private static Stack<Integer> intStack=new Stack<Integer>();
+	private static Stack<Boolean> booleanStack=new Stack<Boolean>(); 
 	private static Map<String,Integer> intSymbols=new HashMap<String,Integer>();
 	private static Map<String,Boolean> boolSymbols=new HashMap<String,Boolean>();
 	private static String keyINT="INT";
 	private static String keyBOOL="BOOL";
-	public static String top="TOP";
-	public static String topb="TOPB";
+	private static String top="TOP";
+	private static String topb="TOPB";
 	public static void init()
 	{
 		operations.add("START");
@@ -60,6 +63,18 @@ public class ReservedKeywords {
 		//Adding reserved Words
 		reservWords.add("INT");
 		reservWords.add("BOOL");
+	}
+	public static int getTop() {
+		return intStack.pop();
+	}
+	public static void setTop(int top) {
+		intStack.push(top);
+	}
+	public static boolean getTopb() {
+		return booleanStack.pop();
+	}
+	public static void setTopb(boolean topb) {
+		booleanStack.push(topb);
 	}
 	public static boolean isOperation(String opr)
 	{
@@ -122,7 +137,11 @@ public class ReservedKeywords {
 	}
 	public static boolean getBoolValue(String val) {
 		// TODO Auto-generated method stub
-		if(ReservedKeywords.isBool(val))
+		if(topb.equals(val))
+		{
+			return getTopb();
+		}
+		else if(ReservedKeywords.isBool(val))
 		{
 			return ReservedKeywords.getBool(val);
 		}
@@ -133,7 +152,11 @@ public class ReservedKeywords {
 
 	public static int getINTValue(String var)
 	{
-		if(ReservedKeywords.isINT(var))
+		if(top.equals(var))
+		{
+			return getTop();
+		}
+		else if(ReservedKeywords.isINT(var))
 		{
 			return ReservedKeywords.getINT(var);
 		}

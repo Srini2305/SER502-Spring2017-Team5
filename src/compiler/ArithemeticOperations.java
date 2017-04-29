@@ -35,37 +35,43 @@ public class ArithemeticOperations {
 		// TODO Auto-generated method stub
 		extractAB(smt);
 		int res=a+b;
-		ReservedKeywords.setINT(resV, res);
+		ReservedKeywords.setTop(res);
+		//ReservedKeywords.setINT(resV, res);
 	}
 	public void executeSUB(Statement smt) {
 		// TODO Auto-generated method stub
 		extractAB(smt);
 		int res=a-b;
-		ReservedKeywords.setINT(resV, res);
+		ReservedKeywords.setTop(res);
+		//ReservedKeywords.setINT(resV, res);
 	}
 	public void executeMUL(Statement smt) {
 		// TODO Auto-generated method stub
 		extractAB(smt);
 		int res=a*b;
-		ReservedKeywords.setINT(resV, res);
+		ReservedKeywords.setTop(res);
+		//ReservedKeywords.setINT(resV, res);
 	}
 	public void executeDIV(Statement smt) {
 		// TODO Auto-generated method stub
 		extractAB(smt);
 		int res=a/b;
-		ReservedKeywords.setINT(resV, res);
+		ReservedKeywords.setTop(res);
+		//ReservedKeywords.setINT(resV, res);
 	}
 	public void executeMOD(Statement smt) {
 		// TODO Auto-generated method stub
 		extractAB(smt);
-		int res=a/b;
-		ReservedKeywords.setINT(resV, res);
+		int res=a%b;
+		ReservedKeywords.setTop(res);
+		//ReservedKeywords.setINT(resV, res);
 	}
 	public void executeAND(Statement smt) {
 		// TODO Auto-generated method stub
 		extractXY(smt);
 		boolean res=x&&y;
-		ReservedKeywords.setBool(resB, res);
+		//ReservedKeywords.setBool(resB, res);
+		ReservedKeywords.setTopb(res);
 		
 		
 	}
@@ -73,7 +79,8 @@ public class ArithemeticOperations {
 		// TODO Auto-generated method stub
 		extractXY(smt);
 		boolean res=x||y;
-		ReservedKeywords.setBool(resB, res);
+		//ReservedKeywords.setBool(resB, res);
+		ReservedKeywords.setTopb(res);
 		
 	}
 	//comparison operations
@@ -81,37 +88,43 @@ public class ArithemeticOperations {
 		// TODO Auto-generated method stub
 		extractAB(smt);
 		boolean res=a<b;
-		ReservedKeywords.setBool(resB, res);
+		//ReservedKeywords.setBool(resB, res);
+		ReservedKeywords.setTopb(res);
 	}
 	public void executeSMLEQL(Statement smt) {
 		// TODO Auto-generated method stub
 		extractAB(smt);
 		boolean res=a<=b;
-		ReservedKeywords.setBool(resB, res);
+		//ReservedKeywords.setBool(resB, res);
+		ReservedKeywords.setTopb(res);
 	}
 	public void executeGRT(Statement smt) {
 		// TODO Auto-generated method stub
 		extractAB(smt);
 		boolean res=a>b;
-		ReservedKeywords.setBool(resB, res);
+		//ReservedKeywords.setBool(resB, res);
+		ReservedKeywords.setTopb(res);
 	}
 	public void executeGRTEQL(Statement smt) {
 		// TODO Auto-generated method stub
 		extractAB(smt);
 		boolean res=(a>=b);
-		ReservedKeywords.setBool(resB, res);
+		//ReservedKeywords.setBool(resB, res);
+		ReservedKeywords.setTopb(res);
 	}
 	public void executeEQL(Statement smt) {
 		// TODO Auto-generated method stub
 		extractAB(smt);
 		boolean res=(a==b);
-		ReservedKeywords.setBool(resB, res);
+		//ReservedKeywords.setBool(resB, res);
+		ReservedKeywords.setTopb(res);
 	}
 	public void executeNOTEQL(Statement smt) {
 		// TODO Auto-generated method stub
 		extractAB(smt);
 		boolean res=(a!=b);
-		ReservedKeywords.setBool(resB, res);
+		//ReservedKeywords.setBool(resB, res);
+		ReservedKeywords.setTopb(res);
 	}
 	public int executeGOTO(List<String> statements, Statement smt) throws Exception {
 		// TODO Auto-generated method stub
