@@ -1,9 +1,11 @@
 #!/bin/bash
 
+#sudo install DVLC /usr/local/bin/DVLC
+
 PATH=~/devils/src/compiler
 
 PYTHON_PATH=/usr/bin
 
 fileName=$1
 
-$PYTHON_PATH/python2 $PATH/DevilsCompiler.py $fileName
+$PYTHON_PATH/python3 $PATH/DevilsCompiler.py $fileName
