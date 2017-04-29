@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#sudo install DVLC /usr/local/bin/DVLC
+#sudo install dvlc /usr/local/bin/dvlc
 
-PATH=~/devils/src/compiler
+PATH=~/devils/compiler
 
 PYTHON_PATH=/usr/bin
 

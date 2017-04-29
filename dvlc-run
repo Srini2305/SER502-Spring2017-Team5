@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#sudo install dvlc-run /usr/local/bin/dvlc-run
+
+PATH=~/devils/
+
+JAVA_PATH=/usr/lib/jvm/java-8-openjdk-amd64/jre/bin
+
+fileName=$1
+
+$JAVA_PATH/java -jar $PATH/DevilsRuntime.jar $fileName
