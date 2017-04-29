@@ -5,7 +5,6 @@ from antlr4.InputStream import InputStream
 from DevilsCodeLexer import DevilsCodeLexer
 from DevilsCodeParser import DevilsCodeParser
 from DevilsCodeListener import DevilsCodeListener
-from DevilsCodeVisitor import DevilsCodeVisitor
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
