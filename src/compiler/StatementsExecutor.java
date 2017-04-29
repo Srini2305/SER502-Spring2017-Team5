@@ -78,7 +78,7 @@ public class StatementsExecutor {
 				case "EQL": ariOps.executeEQL(smt);
 							gotoSkipped=skipGOTO(branching);
 							break;	
-				case "GRT": ariOps.executeGRT(smt);
+				case "GTR": ariOps.executeGRT(smt);
 							gotoSkipped=skipGOTO(branching);
 							break;	
 				case "SMLEQL": ariOps.executeSMLEQL(smt);
@@ -100,7 +100,7 @@ public class StatementsExecutor {
 							break;	
 				case "GOTO" ://implement GOTO
 							int i=ariOps.executeGOTO(statements,smt);
-							index=i;//i-1;
+							index=i-1;
 							//branching =true;
 							break;				
 							
@@ -116,7 +116,9 @@ public class StatementsExecutor {
 	}
 	private boolean skipGOTO(boolean branching)
 	{
-		if(branching&&ReservedKeywords.getTopb())
+		String stat=statements.get(index+1);
+		boolean val=stat.contains("GOTO");
+		if(val&&branching&&ReservedKeywords.getTopb())
 		{
 			index++;//skip GOTO statement
 			return true;

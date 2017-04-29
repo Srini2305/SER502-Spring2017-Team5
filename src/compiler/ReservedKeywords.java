@@ -49,7 +49,7 @@ public class ReservedKeywords {
 		//Adding comparison operators
 		operations.add("EQL");
 		operations.add("SML");
-		operations.add("GRT");
+		operations.add("GTR");
 		operations.add("SMLEQL");
 		operations.add("GRTEQL");
 		operations.add("NOTEQL");

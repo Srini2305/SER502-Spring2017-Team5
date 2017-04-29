@@ -15,8 +15,8 @@ import java.util.List;
  *
  */
 public class StatementsReader {
-	String pathName="/Users/pankajsingh/education/spring2017/ser502Compiler /SER502-Spring2017-Team5/intermediateCode/";
-	String fileName="WhileIf.txt";
+	String pathName="./intermediateCode/";
+	String fileName="NestedIf.txt";
 	public String getPathName() {
 		return pathName;
 	}
