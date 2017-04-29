@@ -36,7 +36,6 @@ stmt
     | 'print ' number ';'
     ;
 
-
 /** Expression
 * <expr> ::= <id>
 *          | <assign_expr>
@@ -113,7 +112,11 @@ while_stmt
 *             | if '(' <expr> ')' <stmt> else <stmt>
 */
 if_stmt
-    : 'if ' '(' expr ')' stmt ('else ' stmt)?
+    : 'if ' '(' expr ')' stmt (else_stmt)?
+    ;
+
+else_stmt
+    : 'else' stmt
     ;
 
 /** Comparison
@@ -137,7 +140,6 @@ DATA_TYPE : 'int ' | 'bool ' ;
 
 /** Identifier - Start with lower case letter */
 IDENT : [a-z] ([a-zA-Z] | '0'..'9')* ;
-
 
 /** Digit */
 DIGIT : [0-9] ;
