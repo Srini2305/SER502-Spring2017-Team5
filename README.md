@@ -12,5 +12,7 @@ Install steps:
 3. Get the intermediate code with command:
    "DVLC <FILE_NAME>"
 
-
-
+Bug information:
+1. Go to antlr4 dirctory, usually "~/.local/lib/python3.5/site-packages/antlr4"
+   Access ParserRuleContext.py
+   In line 116, modify the if statment "if len(self.children)>=i" to "if len(self.children)>i" 
