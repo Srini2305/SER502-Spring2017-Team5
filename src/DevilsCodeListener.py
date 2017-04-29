@@ -1,11 +1,16 @@
 # Generated from DevilsCode.g4 by ANTLR 4.7
 from antlr4 import *
+import re
+import os
 import GlobalStack as gStack
 import TempVar as tVar
 
 # This class defines a complete listener for a parse tree produced by DevilsCodeParser.
 class DevilsCodeListener(ParseTreeListener):
-    
+    def __init__(self):
+        self.symbol_table = []
+        self.tokens = []
+
     # Enter a parse tree produced by DevilsCodeParser#program.
     def enterProgram(self, ctx):
         # Declare the global row number counter
@@ -47,6 +52,10 @@ class DevilsCodeListener(ParseTreeListener):
 
     # Enter a parse tree produced by DevilsCodeParser#stmt.
     def enterStmt(self, ctx):
+        if(str(ctx.getChild(0)) == "print "):
+            self.tokens.append(str(ctx.getChild(1)))
+        else:
+            self.tokens.append(str(ctx.getChild(0)))
         # Declare the global row number counter
         global rowNum
 
@@ -69,6 +78,7 @@ class DevilsCodeListener(ParseTreeListener):
 
     # Enter a parse tree produced by DevilsCodeParser#expr.
     def enterExpr(self, ctx):
+        self.tokens.append(str(ctx.getChild(0)))
         pass
 
     # Exit a parse tree produced by DevilsCodeParser#expr.
@@ -79,6 +89,7 @@ class DevilsCodeListener(ParseTreeListener):
     # Enter a parse tree produced by DevilsCodeParser#dec_stmt.
     def enterDec_stmt(self, ctx):
         # Declare the global row number counter
+        self.symbol_table.append(str(ctx.getChild(1).getChild(0)))
         global rowNum
 
         dataType = ctx.getChild(0).getText()  # Data Type
@@ -109,6 +120,7 @@ class DevilsCodeListener(ParseTreeListener):
 
     # Enter a parse tree produced by DevilsCodeParser#assign_expr.
     def enterAssign_expr(self, ctx):
+        self.tokens.append(str(ctx.getChild(0)))
         pass
 
     # Exit a parse tree produced by DevilsCodeParser#assign_expr.
@@ -149,7 +161,21 @@ class DevilsCodeListener(ParseTreeListener):
 
     # Enter a parse tree produced by DevilsCodeParser#math_expr.
     def enterMath_expr(self, ctx):
+        self.tokens.append(str(ctx.getChild(0)))
         pass
+
+    def symbolTableChecker(self, isLexicalError):
+        literalNames = [ "main ", "(", ")", "{", "}",
+                     ";", "print ", "=", "+", "-", "*", "/",
+                     "while ", "if ", "else ", "true", "false", "int ", "bool " ]
+        self.tokens = [ x for x in self.tokens if not re.match('[\[\]]', x) and x not in literalNames]
+        if isLexicalError:
+            os.remove("DevilsCodeIntermediate")
+            quit()
+        for id in self.tokens:
+            if id not in self.symbol_table:
+                print("ERROR: " + id + " not declared")
+                os.remove("DevilsCodeIntermediate")
 
     # Exit a parse tree produced by DevilsCodeParser#math_expr.
     def exitMath_expr(self, ctx):
@@ -205,7 +231,6 @@ class DevilsCodeListener(ParseTreeListener):
         iCodeFile.write(writeStr)
         iCodeFile.close()
         rowNum += 1
-        
         pass
 
 
@@ -401,10 +426,10 @@ class DevilsCodeListener(ParseTreeListener):
 
     # Enter a parse tree produced by DevilsCodeParser#cpr_term.
     def enterCpr_term(self, ctx):
+        self.tokens.append(str(ctx.getChild(0)))
         pass
 
     # Exit a parse tree produced by DevilsCodeParser#cpr_term.
     def exitCpr_term(self, ctx):
         pass
-
 
