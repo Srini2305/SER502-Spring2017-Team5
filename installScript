@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo install dvlc /usr/local/bin/dvlc
+sudo install dvlc-run /usr/local/bin/dvlc-run
