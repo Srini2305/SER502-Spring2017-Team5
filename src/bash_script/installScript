@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#*********************************************************#
+# File name: installScript                                #
+# Author: Ting Yeu Yang                                   #
+# Date: 04-29-17                                          #
+#                                                         #
+# Install the commands that needed during compiling and   #
+# runtime                                                 #  
+#                                                         #
+#*********************************************************#
+
+
+sudo install dvlc /usr/local/bin/dvlc
+sudo install dvlc-run /usr/local/bin/dvlc-run

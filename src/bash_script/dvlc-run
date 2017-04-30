@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#*********************************************************#
+# File name: dvlc-run                                     #
+# Author: Ting Yeu Yang                                   #
+# Date: 04-29-17                                          #
+#                                                         #
+# Convert the runtime command line into just one word     #
+#                                                         #
+#*********************************************************#
+
+PATH=~/devils/
+
+JAVA_PATH=/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin
+
+fileName=$1
+
+$JAVA_PATH/java -jar $PATH/DevilsRuntime.jar $fileName
