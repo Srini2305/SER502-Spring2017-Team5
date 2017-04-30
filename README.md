@@ -17,14 +17,14 @@ Steps:
 
 3. Install the scipts with command: "sh installScript"
 
-## Bug informaiton:
-There is a bug in the original ANTLR library, we fixed it and sepearted the custom version into /src/compiler/
-
-In "ParserRuleContext.py" line 116, the if-statment "if len(self.children) >= i" should be "if len(self.children) > i" 
-
 ## How to Use
 1. Get the intermediate code with command: "dvlc <FILE_NAME>"
 
 2. Run the intermediate code with command: "dvlc-run <FILE_NAME>"
+
+## Bug informaiton:
+There is a bug in the original ANTLR library, we fixed it and sepearted the custom version into /src/compiler/
+
+In "ParserRuleContext.py" line 116, the if-statment "if len(self.children) >= i" should be "if len(self.children) > i" 
 
 ## YouTube Link
