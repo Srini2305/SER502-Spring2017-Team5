@@ -16,7 +16,9 @@ Hari Iyer
 /********************************************/
 
 Pankaj Singh
-
+1. Contributed in Language rules
+2. Involved in design of Intermediate code 
+3. Designed and implemented runtime for Devilscode in Java
 
 /********************************************/
 
