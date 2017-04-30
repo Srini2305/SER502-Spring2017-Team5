@@ -1,7 +1,7 @@
 /**
  * 
  */
-package compiler;
+package runtime;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class StatementsReader {
 	String pathName="./intermediateCode/";
-	String fileName="NestedIf.txt";
+	String fileName="Factorial.ic";
 	public String getPathName() {
 		return pathName;
 	}
