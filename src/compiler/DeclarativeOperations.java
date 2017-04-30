@@ -5,6 +5,10 @@ package compiler;
 
 /**
  * @author pankajsingh
+ * @Date : April 14, 2017
+ * @version: 4
+ * @Purpose: For Declarative statements 
+ * 
  *
  */
 public class DeclarativeOperations {
