@@ -1,4 +1,4 @@
-# Written by Mingfei Yang
+# Written by Mingfei Yang, Tingyeu Yang
 # Version 1.0.0
 # Date: April 28, 2017
 # Purpose: Stack Structure for Intermediate Code Generation
