@@ -1,4 +1,9 @@
 # Generated from DevilsCode.g4 by ANTLR 4.7
+# Modified by Hari Iyer and Mingfei Yang
+# Date: April 10, 2017
+# Version: 3.0.0
+# Purpose: Parse Tree traversal
+
 from antlr4 import *
 import re
 import os
@@ -7,20 +12,54 @@ import TempVar as tVar
 
 # This class defines a complete listener for a parse tree produced by DevilsCodeParser.
 class DevilsCodeListener(ParseTreeListener):
-    def __init__(self):
+    def __init__(self, file_name):
         self.symbol_table = []
         self.tokens = []
+        self.file_name = file_name
+
+       # Open intermediate code file to apppend str
+    def appendICode(self, writeStr):
+        # Append writeStr into File
+        iCodeFile = open(self.file_name + '.ic', 'a')
+        iCodeFile.write(writeStr)
+        iCodeFile.close()
+
+        pass
+
+    # Insert GOTO into intermediate code file
+    def insertGOTO(self, targetRow):
+        # Global rN for writing GOTO
+        global rN
+
+        rN = gStack.GetRNStack()
+        # Write GOTO
+        lines = []
+        iCodeFile = open(self.file_name + '.ic', 'r')
+        for line in iCodeFile:
+            lines.append(line)
+        iCodeFile.close()
+        lNum = rN.pop()
+        lOffset = rN.stackSize()
+        lines.insert(lNum - lOffset, str(lNum) + ' GOTO ' + str(targetRow) + '\n')
+        writeStr = ''.join(lines)
+        iCodeFile = open(self.file_name + '.ic', 'w+')
+        iCodeFile.write(writeStr)
+        iCodeFile.close()
+
+        pass
+
 
     # Enter a parse tree produced by DevilsCodeParser#program.
     def enterProgram(self, ctx):
         # Declare the global row number counter
         global rowNum
-
+        global condFlag
+        condFlag = False
         # Set row number to 0
         rowNum = 0
         # Create or Override Intermediate Code File
-        iCodeFile = open('DevilsCodeIntermediate', 'w')
-        writeStr = str(rowNum) + ' ' + 'BEGIN' + '\n'
+        iCodeFile = open(self.file_name + '.ic', 'w')
+        writeStr = str(rowNum) + ' ' + 'START' + '\n'
         iCodeFile.write(writeStr)
         iCodeFile.close()
         rowNum += 1
@@ -33,11 +72,9 @@ class DevilsCodeListener(ParseTreeListener):
         global rowNum
 
         # End symbol for intermediate code
-        iCodeFile = open('DevilsCodeIntermediate', 'a')
-        writeStr = str(rowNum) + ' ' + 'END' + '\n'
-        iCodeFile.write(writeStr)
-        iCodeFile.close()
-
+        writeStr = str(rowNum) + ' ' + 'STOP' + '\n'
+        self.appendICode(writeStr)
+        rowNum += 1
         pass
 
 
@@ -61,18 +98,43 @@ class DevilsCodeListener(ParseTreeListener):
 
         lChild = ctx.getChild(0).getText()
 
-        # Print stmt
+        # For print stmt
         if lChild == 'print ':
-            iCodeFile = open('DevilsCodeIntermediate', 'a')
             rChild = ctx.getChild(1).getText()
             writeStr = str(rowNum) + ' ' + 'PRINT' + ' ' + rChild + '\n'
-            iCodeFile.write(writeStr)
-            iCodeFile.close()
-
+            self.appendICode(writeStr)
+            rowNum += 1
+        # { Stmt }
+        if lChild == '{':
+            # Generate BEGIN for open brackets
+            writeStr = str(rowNum) + ' ' + 'BEGIN' + '\n'
+            self.appendICode(writeStr)
+            rowNum += 1
         pass
 
+    
     # Exit a parse tree produced by DevilsCodeParser#stmt.
     def exitStmt(self, ctx):
+        # Declare the global row number counter
+        global rowNum
+        # Global CondFlag and ElseFlag
+        global condFlag
+        global elseFlag
+
+        lChild = ctx.getChild(0).getText()
+        if lChild == '{' and condFlag:
+            writeStr = str(rowNum) + ' ' + 'END' + '\n'       
+            self.appendICode(writeStr)
+            rowNum += 1
+            # If condFlag and elseFlag are True, generate ELSE
+            if condFlag and elseFlag:
+                # Write GOTO
+                self.insertGOTO(rowNum - 1)
+                # Write ELSE
+                writeStr = str(rowNum) + ' ' + 'ELSE' + '\n'
+                self.appendICode(writeStr)
+                rowNum += 1
+                elseFlag = False
         pass
 
 
@@ -89,13 +151,15 @@ class DevilsCodeListener(ParseTreeListener):
     # Enter a parse tree produced by DevilsCodeParser#dec_stmt.
     def enterDec_stmt(self, ctx):
         # Declare the global row number counter
-        self.symbol_table.append(str(ctx.getChild(1).getChild(0)))
+        if '=' in ctx.getChild(1).getText():
+            self.symbol_table.append(str(ctx.getChild(1).getChild(0)))
+        else:
+            self.symbol_table.append(str(ctx.getChild(1)))
         global rowNum
 
         dataType = ctx.getChild(0).getText()  # Data Type
         rChild = ctx.getChild(1)  # Identifier or expression
 
-        iCodeFile = open('DevilsCodeIntermediate', 'a')
         writeStr = str(rowNum) + ' ' + 'DEC' + ' '
 
         # For DATA_TYPE IDENT format
@@ -106,9 +170,7 @@ class DevilsCodeListener(ParseTreeListener):
             ident = rChild.getChild(0).getText()
             #value = rChild.getChild(2).getText()
             writeStr += ( ident + ' ' + dataType.upper() + '\n' )
-
-        iCodeFile.write(writeStr)
-        iCodeFile.close()
+        self.appendICode(writeStr)
         rowNum += 1
 
         pass
@@ -129,33 +191,28 @@ class DevilsCodeListener(ParseTreeListener):
         # Declare the global row number counter
         global rowNum
         # Declare the global temp variable
-        global Temp1, Temp2
+        global Temp
 
-        Temp1 = tVar.GetTempVar_1()
-        Temp2 = tVar.GetTempVar_2()
+        Temp = tVar.GetTempVar()
 
         ident = ctx.getChild(0).getText()
         expr = ctx.getChild(2).getText()
 
-        iCodeFile = open('DevilsCodeIntermediate', 'a')
         writeStr = str(rowNum) + ' ' + 'ASSN' + ' ' + ident + ' '
         # If Right child is an Expression
         # then Temp Variable will represent the value of Expression
         if ( '+' in expr or '-' in expr or '*' in expr or '/' in expr ):
-            writeStr += (Temp1.getName() + '\n')
+            writeStr += (Temp.getName() + '\n')
         # Right child is an IDENT or a value
         else:
             writeStr += (expr + '\n')
 
-        iCodeFile.write(writeStr)
-        iCodeFile.close()
+        self.appendICode(writeStr)
         rowNum += 1
 
         # Set Temp variables' flag to False after each Assignment
         # Release temp variables
-        Temp1.setFlag(False)
-        Temp2.setFlag(False)
-
+        Temp.setFlag(False)
         pass
 
 
@@ -164,18 +221,16 @@ class DevilsCodeListener(ParseTreeListener):
         self.tokens.append(str(ctx.getChild(0)))
         pass
 
-    def symbolTableChecker(self, isLexicalError):
+    def symbolTableChecker(self):
         literalNames = [ "main ", "(", ")", "{", "}",
                      ";", "print ", "=", "+", "-", "*", "/",
-                     "while ", "if ", "else ", "true", "false", "int ", "bool " ]
+                     "while ", "if ", "else", "true", "false", "int ", "bool " ]
         self.tokens = [ x for x in self.tokens if not re.match('[\[\]]', x) and x not in literalNames]
-        if isLexicalError:
-            os.remove("DevilsCodeIntermediate")
-            quit()
         for id in self.tokens:
             if id not in self.symbol_table:
                 print("ERROR: " + id + " not declared")
-                os.remove("DevilsCodeIntermediate")
+                os.remove(self.file_name + '.ic')
+                quit()
 
     # Exit a parse tree produced by DevilsCodeParser#math_expr.
     def exitMath_expr(self, ctx):
@@ -183,7 +238,7 @@ class DevilsCodeListener(ParseTreeListener):
         global rowNum
 
         # Declare two global temp variables
-        global Temp1, Temp2
+        global Temp
 
         lOperand = ctx.getChild(0).getText()
         rOperand = ' '
@@ -196,7 +251,6 @@ class DevilsCodeListener(ParseTreeListener):
         if ( ctx.getChild(2) ):
             rOperand = ctx.getChild(2).getText()
 
-        iCodeFile = open('DevilsCodeIntermediate', 'a')
         writeStr = str(rowNum) + ' '
         # If operator exists
         if (op == '+'):
@@ -208,13 +262,8 @@ class DevilsCodeListener(ParseTreeListener):
 
         # If lOperand is Expr with op
         if ('+' in lOperand or '-' in lOperand or '*' in lOperand or '/' in lOperand ):
-            # If TOP and TOP1 are occupied, it must be represented by TOP
-            if Temp1.getFlag() and Temp2.getFlag():
-                Temp1.setFlag(True)
-                writeStr += (Temp1.getName() + ' ')
-            else:
-                Temp2.setFlag(True)
-                writeStr += (Temp2.getName() + ' ')
+            Temp.setFlag(True)
+            writeStr += (Temp.getName() + ' ')
         # Else lOperand is IDENT or Number
         else:
             writeStr += (lOperand + ' ')
@@ -222,15 +271,16 @@ class DevilsCodeListener(ParseTreeListener):
         # If rOperand is Term with op
         if ('+' in rOperand or '-' in rOperand or '*' in rOperand or '/' in rOperand ):
             # If TOP is occupied, it must be represented by TOP
-            Temp1.setFlag(True)
-            writeStr += (Temp1.getName() + '\n')
+            Temp.setFlag(True)
+            writeStr += (Temp.getName() + '\n')
         # Else lOperand is IDENT or Number
         else:
             writeStr += (rOperand + '\n')
 
-        iCodeFile.write(writeStr)
-        iCodeFile.close()
+        self.appendICode(writeStr)
         rowNum += 1
+        if op:
+            Temp.setFlag(True)
         pass
 
 
@@ -243,7 +293,7 @@ class DevilsCodeListener(ParseTreeListener):
         # Declare global row number counter
         global rowNum
         # Declare two global Temp Var
-        global Temp1, Temp2
+        global Temp
 
         #print(rowNum, nestedTerm)
         lOperand = ctx.getChild(0).getText()
@@ -258,7 +308,6 @@ class DevilsCodeListener(ParseTreeListener):
         if ( ctx.getChild(2) ):
             rOperand = ctx.getChild(2).getText()
 
-        iCodeFile = open('DevilsCodeIntermediate', 'a')
         writeStr = str(rowNum) + ' '
 
         # If operator exists
@@ -271,35 +320,25 @@ class DevilsCodeListener(ParseTreeListener):
 
         # If left operand is Term or Factor->(expr)
         if ('*' in lOperand or '/' in lOperand or '(' in lOperand ):
-            # Temp 1 is used, Temp 2 is not used
-            if ( Temp1.getFlag() and not Temp2.getFlag() ):
-                writeStr += (Temp1.getName() + ' ')
-            # Temp 2 is used, Temp 1 is not used
-            else:
-                writeStr += (Temp2.getName() + ' ')
+            Temp.setFlag(True)
+            writeStr += (Temp.getName() + ' ')
         # If left operand is IDENT or Number
         else:
             writeStr += (lOperand + ' ')
             
         # If right operand is Term or Factor->(expr)
         if ('*' in rOperand or '/' in rOperand or '(' in rOperand ):
-            # Temp 1 is used, Temp 2 is not used
-            if ( Temp1.getFlag() and not Temp2.getFlag() ):
-                writeStr += (Temp1.getName() + '\n')
-            # Temp 2 is used, Temp 1 is not used
-            else:
-                writeStr += (Temp2.getName() + '\n')
+            Temp.setFlag(True)
+            writeStr += (Temp.getName() + '\n')
         else:
             writeStr += (rOperand + '\n')
-
-        iCodeFile.write(writeStr)
-        iCodeFile.close()
+        self.appendICode(writeStr)
         rowNum += 1
 
         # Set Flag of Temp Variable TOP
         # It must be used
-        if not Temp1.getFlag():
-            Temp1.setFlag(True)
+        if op:
+            Temp.setFlag(True)
 
         pass
 
@@ -313,11 +352,10 @@ class DevilsCodeListener(ParseTreeListener):
         # Global Row Number
         global rowNum
         # Global Temp Variables
-        global Temp1, Temp2
+        global Temp
         
         # Set or Get Temp Var
-        Temp1 = tVar.GetTempVar_1()
-        Temp2 = tVar.GetTempVar_2()
+        Temp = tVar.GetTempVar()
 
         pass
 
@@ -340,11 +378,9 @@ class DevilsCodeListener(ParseTreeListener):
 
         loopRowStack = gStack.GetLoopStack()
 
-        iCodeFile = open('DevilsCodeIntermediate', 'a')
         writeStr = str(rowNum) + ' ' + 'LOOP' + '\n'
         loopRowStack.push(rowNum)
-        iCodeFile.write(writeStr)
-        iCodeFile.close()
+        self.appendICode(writeStr)
         rowNum += 1
 
         pass
@@ -355,44 +391,72 @@ class DevilsCodeListener(ParseTreeListener):
         global rowNum
         # Declare the global loop row stack
         global loopRowStack
-
-        iCodeFile = open('DevilsCodeIntermediate', 'a')
+        global rN
+        rN = gStack.GetRNStack()
         writeStr = str(rowNum) + ' ' + 'GOTO' + ' ' + str(loopRowStack.pop()) + '\n'       
-        iCodeFile.write(writeStr)
-        iCodeFile.close()
+        self.appendICode(writeStr)
         rowNum += 1
+        # END for Loop
+        writeStr = str(rowNum) + ' ' + 'END' + '\n'       
+        self.appendICode(writeStr)
 
+        # Insert in Line rN
+        self.insertGOTO(rowNum)
+
+        rowNum += 1
         pass
-
 
     # Enter a parse tree produced by DevilsCodeParser#if_stmt.
     def enterIf_stmt(self, ctx):
         # Declare the global row number counter
         global rowNum
+        # Global CondFlag and ElseFlag
+        global condFlag
+        global elseFlag
 
-        iCodeFile = open('DevilsCodeIntermediate', 'a')
-        writeStr = str(rowNum) + ' ' + 'COND' + '\n'       
-        iCodeFile.write(writeStr)
-        iCodeFile.close()
+        condFlag = True
+
+        # If 'else' exists, it should be the 6th child
+        elseKey = ctx.getChild(5)
+        if elseKey:
+            elseFlag = True
+        else:
+            elseFlag = False
+
+        writeStr = str(rowNum) + ' ' + 'IF' + '\n'       
+        self.appendICode(writeStr)
+
         rowNum += 1
-
         pass
 
     # Exit a parse tree produced by DevilsCodeParser#if_stmt.
     def exitIf_stmt(self, ctx):
         # Declare the global row number counter
         global rowNum
+        # Global CondFlag and ElseFlag
+        global condFlag
+        global elseFlag
 
-        iCodeFile = open('DevilsCodeIntermediate', 'a')
-        writeStr = str(rowNum) + ' ' + 'COND_END' + '\n'       
-        iCodeFile.write(writeStr)
-        iCodeFile.close()
-        rowNum += 1
+        rN = gStack.GetRNStack()
 
+        elseKey = ctx.getChild(5)
+        # If no ELSE stmt, Complete GOTO Line labeled by rN
+        if not elseKey:
+            self.insertGOTO(rowNum - 1)
+
+        condFlag = False
+        elseFlag = False
         pass
 
+    # Enter a parse tree produced by DevilsCodeParser#else_stmt.
+    def enterElse_stmt(self, ctx):
+        pass
 
-    # Enter a parse tree produced by DevilsCodeParser#cpr_expr.
+    # Exit a parse tree produced by DevilsCodeParser#else_stmt.
+    def exitElse_stmt(self, ctx):
+        pass
+
+     # Enter a parse tree produced by DevilsCodeParser#cpr_expr.
     def enterCpr_expr(self, ctx):
         # Declare the global row number counter
         global rowNum
@@ -401,26 +465,32 @@ class DevilsCodeListener(ParseTreeListener):
         cmpLeft = ctx.getChild(0).getText()
         cmpRight = ctx.getChild(2).getText()
 
-        iCodeFile = open('DevilsCodeIntermediate', 'a')
         if (cmpSymbol == '<'):
-            writeStr = str(rowNum) + ' ' + 'CMPL' + ' '
+            writeStr = str(rowNum) + ' ' + 'SML' + ' '
         elif (cmpSymbol == '<='):
-            writeStr = str(rowNum) + ' ' + 'CMPLE' + ' '
+            writeStr = str(rowNum) + ' ' + 'SMLEQL' + ' '
         elif (cmpSymbol == '>'):
-            writeStr = str(rowNum) + ' ' + 'CMPG' + ' '
+            writeStr = str(rowNum) + ' ' + 'GTR' + ' '
         elif (cmpSymbol == '>='):
-            writeStr = str(rowNum) + ' ' + 'CMPGE' + ' '
+            writeStr = str(rowNum) + ' ' + 'GTREQL' + ' '
         else:
-            writeStr = str(rowNum) + ' ' + 'CMPE' + ' '
+            writeStr = str(rowNum) + ' ' + 'EQL' + ' '
         writeStr += cmpLeft + ' ' + cmpRight + '\n'
-        iCodeFile.write(writeStr)
-        iCodeFile.close()
+        self.appendICode(writeStr)
         rowNum += 1
-
         pass
 
     # Exit a parse tree produced by DevilsCodeParser#cpr_expr.
     def exitCpr_expr(self, ctx):
+        # Global Row Num
+        global rowNum
+        # Global rN for writing END rowNum back
+        global rN
+        
+        rN = gStack.GetRNStack()
+        rN.push(rowNum)
+
+        rowNum += 1
         pass
 
 
@@ -432,4 +502,3 @@ class DevilsCodeListener(ParseTreeListener):
     # Exit a parse tree produced by DevilsCodeParser#cpr_term.
     def exitCpr_term(self, ctx):
         pass
-
