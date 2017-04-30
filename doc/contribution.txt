@@ -11,7 +11,10 @@ Mingfei Yang
 /********************************************/
 
 Hari Iyer
-
+1. Assisted with the Grammar rules
+2. Worked on Lexical Analysis
+3. Employed the ANTLR Parser
+4. Parse Tree generation
 
 /********************************************/
 
