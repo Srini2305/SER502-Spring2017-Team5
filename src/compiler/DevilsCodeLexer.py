@@ -1,6 +1,6 @@
 # Author: Generated from DevilsCode.g4 by ANTLR 4.7
-# Date: April 28, 2017
-# Version: 3.0.0
+# Date: April 25, 2017
+# Version: 3
 # Purpose: To carry out Lexical analysis of the code
 
 # Generated from DevilsCode.g4 by ANTLR 4.7
