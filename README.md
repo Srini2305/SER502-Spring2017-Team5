@@ -2,7 +2,7 @@
 Semester project for SER 502
 
 ## Development Environment
-Systems: Linux
+Systems: Ubuntu 16.04 LTS
 
 Tools to build compiler: Python 3.5.2 and ANTLR 4.7
 
