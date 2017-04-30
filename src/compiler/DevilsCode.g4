@@ -1,7 +1,9 @@
-/** Author: ANTLR-generated Grammar
+/** 
+Author: Mingfei Yang, Hari Iyer
 Version: 2
-Date: April 26, 2017
-Purpose: Grammar For DevilsCode */
+Date: April 29, 2017
+Purpose: Use as the input grammar rule for ANTLR 4 to generate Lexer and Parser 
+*/
 
 grammar DevilsCode;
 
