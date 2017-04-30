@@ -1,5 +1,6 @@
 __loopStack = None
-__tempStack = None
+__rnStack = None
+__condStack = None
 
 def GetLoopStack():
     global __loopStack
@@ -7,17 +8,31 @@ def GetLoopStack():
         __loopStack = StackEx()
     return __loopStack
 
-def GetTempStack():
-    global __tempStack
-    if not __tempStack:
-        __tempStack = StackEx()
-    return __tempStack
+def GetRNStack():
+    global __rnStack
+    if not __rnStack:
+        __rnStack = StackEx()
+    return __rnStack
+
+def GetCondStack():
+    global __condStack
+    if not __condStack:
+        __condStack = StackEx()
+    return __condStack
 
 
 class StackEx(object):
     def __init__(self):
         self.__stackList = []
-        
+
+    def isEmpty(self):
+        if self.__stackList == []:
+            return True
+        else:
+            return False
+
+    def stackSize(self):
+        return len(self.__stackList)
         
     def push(self, input):
         self.__stackList.append(input)
