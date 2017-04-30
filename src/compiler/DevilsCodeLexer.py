@@ -3,7 +3,6 @@
 # Version: 3
 # Purpose: To carry out Lexical analysis of the code
 
-# Generated from DevilsCode.g4 by ANTLR 4.7
 from antlr4 import *
 from io import StringIO
 from typing.io import TextIO
