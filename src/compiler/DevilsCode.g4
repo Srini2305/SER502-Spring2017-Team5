@@ -1,4 +1,7 @@
-/** Grammar For DevilsCode */
+/** Author: ANTLR-generated Grammar
+Version: 2
+Date: April 26, 2017
+Purpose: Grammar For DevilsCode */
 
 grammar DevilsCode;
 
