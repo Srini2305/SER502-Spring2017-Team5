@@ -6,26 +6,16 @@ Systems: Linux
 
 Tools to build compiler: Python 3.5.2 and ANTLR 4.7
 
-Tools to build runtime: Jave 1.8
+Tools to build runtime: Jave 1.6
 
 ## Installation Instruction
-
 Steps:
 
-1. Install Python 3.5.2 and Jave RE
+1. Install Python 3.5.2 and Jave SE Runtime 1.6 or above
 
-2. Install ANTLR 4.7 with command "pip install antlr4-python3-runtime"
+2. Extract devils.tar.gz to home directory
 
-3. Extract devils.tar.gz to home directory
-
-4. Install the scipts with command: "sh installScript"
-
-Bug information:
-1. Go to antlr4 dirctory, usually "~/.local/lib/python3.5/site-packages/antlr4"
-
-2. Open "ParserRuleContext.py" with text editor
-
-3. In line 116, modify the if-statment "if len(self.children)>=i" to "if len(self.children)>i" 
+3. Install the scipts with command: "sh installScript"
 
 ## How to Use
 1. Get the intermediate code with command: "dvlc <FILE_NAME>"
