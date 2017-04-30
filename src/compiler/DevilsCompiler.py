@@ -1,6 +1,6 @@
 # Author: Hari Iyer
-# Version: 3.0.0
-# Date: April 28, 2017
+# Version: 2
+# Date: April 23, 2017
 # Purpose: An integrated sequence of steps for Lexical analysis and Parse Tree generation.
 
 import sys
