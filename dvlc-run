@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#sudo install dvlc-run /usr/local/bin/dvlc-run
-
 PATH=~/devils/
 
 JAVA_PATH=/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin
