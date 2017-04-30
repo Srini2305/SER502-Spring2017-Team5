@@ -4,7 +4,7 @@
 
 PATH=~/devils/
 
-JAVA_PATH=/usr/lib/jvm/java-8-openjdk-amd64/jre/bin
+JAVA_PATH=/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin
 
 fileName=$1
 
