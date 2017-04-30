@@ -1,17 +1,14 @@
-__var1 = None
-__var2 = None
+# Written by Mingfei Yang
+# Version 1.0.0
+# Date: April 28, 2017
+# Purpose: Track the temporary values in the arithmetic operations.
+__var = None
 
-def GetTempVar_1():
-    global __var1
-    if not __var1:
-        __var1 = TempVar('TOP')
-    return __var1
-
-def GetTempVar_2():
-    global __var2
-    if not __var2:
-        __var2 = TempVar('TOP1')
-    return __var2
+def GetTempVar():
+    global __var
+    if not __var:
+        __var = TempVar('TOP')
+    return __var
 
 class TempVar(object):
     def __init__(self, name):
