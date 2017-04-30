@@ -31,8 +31,9 @@ Pankaj Singh
 Ting Yeu Yang
 1. Main writer for original grammar rules
 2. Support intermediate code generator building
-3. Present introduction and grammar in demo video
+3. Generate bash scripts
 4. Merge branches and documents
+5. Present introduction and grammar in demo video
 
 /********************************************/
 
