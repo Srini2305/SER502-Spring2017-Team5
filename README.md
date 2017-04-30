@@ -6,7 +6,7 @@ Systems: Linux
 
 Tools to build compiler: Python 3.5.2 and ANTLR 4.7
 
-Tools to build runtime: Jave 1.6
+Tools to build runtime: Jave 1.8
 
 ## Installation Instruction
 
