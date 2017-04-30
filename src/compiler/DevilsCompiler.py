@@ -1,4 +1,4 @@
-# Author: Hari Iyer
+# Authors: Hari Iyer and Mingfei Yang
 # Version: 2
 # Date: April 23, 2017
 # Purpose: An integrated sequence of steps for Lexical analysis and Parse Tree generation.
