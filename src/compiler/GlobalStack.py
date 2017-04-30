@@ -1,3 +1,8 @@
+# Written by Mingfei Yang
+# Version 1.0.0
+# Date: April 28, 2017
+# Purpose: Stack Structure for Intermediate Code Generation
+
 __loopStack = None
 __rnStack = None
 __condStack = None
