@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#*********************************************************#
+# File name: dvlc                                         #
+# Author: Ting Yeu Yang                                   #
+# Date: 04-29-17                                          #
+#                                                         #
+# Convert the compile command line into just one word     #
+#                                                         #
+#*********************************************************#
+
+PATH=~/devils/compiler
+
+PYTHON_PATH=/usr/bin
+
+fileName=$1
+
+$PYTHON_PATH/python3 $PATH/DevilsCompiler.py $fileName

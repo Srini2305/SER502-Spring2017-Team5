@@ -1,0 +1,33 @@
+main ()
+{
+    int i;
+    int f = 5;
+    int a = 3;
+    int b = 4;
+    int c = 10;
+    int d = 5;
+
+    i = (10 + 13 + (a + b)) * ((c - d) * (15 + 5));
+
+    if ( i < f )
+    {
+        i = i + 3*2;
+        
+    }
+    else 
+    {
+        i = i - 1;
+    }
+
+    while (f > 1)
+    {
+        f = f - 1;
+        if (i > 5)
+        {
+            i = i - 1;
+        }
+    }
+
+    print i;
+    print f;
+}
