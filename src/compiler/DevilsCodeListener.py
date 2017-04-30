@@ -1,7 +1,7 @@
 # Generated from DevilsCode.g4 by ANTLR 4.7
 # Modified by Hari Iyer and Mingfei Yang
-# Date: April 29, 2017
-# Version: 3.0.0
+# Date: April 21, 2017
+# Version: 2
 # Purpose: Parse Tree traversal
 
 from antlr4 import *
