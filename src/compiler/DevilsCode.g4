@@ -1,5 +1,6 @@
 /** 
-Author: Mingfei Yang, Hari Iyer
+Author: Mingfei Yang, Hari Iyer (Convert Original Grammar Rules into Grammar File) 
+        Ting Yeu Yang (Author of Original Grammar Rules)
 Version: 2
 Date: April 29, 2017
 Purpose: Use as the input grammar rule for ANTLR 4 to generate Lexer and Parser 
