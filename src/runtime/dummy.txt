@@ -1,2 +1,0 @@
-This dummy file is created since git doesn't support empty folder
-Please remove this file after runtime is committed
