@@ -12,7 +12,10 @@
 
 2. Download and extract devils.tar.gz to home directory
 
-3. Install the scipts with command: "sh installScript"
+3. Install the scipts with command
+```sh
+$ sh installScript"
+```
 
 ### Python 3.5.2 Installation Steps
 ```sh
