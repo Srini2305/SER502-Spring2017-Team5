@@ -14,7 +14,7 @@
 
 3. Install the scipts with command:
 ```sh
-$ sh installScript"
+$ sh installScript
 ```
 
 ### Python 3.5.2 Installation Steps
