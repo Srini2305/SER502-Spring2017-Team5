@@ -10,7 +10,7 @@ Tools to build runtime: Jave SE 1.6
 
 1. Install Python 3.5.2 and Jave SE Runtime 1.6 or above
 
-2. Extract devils.tar.gz to home directory
+2. Download and extract devils.tar.gz to home directory
 
 3. Install the scipts with command: "sh installScript"
 
