@@ -117,15 +117,24 @@ class DevilsCodeListener(ParseTreeListener):
     def exitStmt(self, ctx):
         # Declare the global row number counter
         global rowNum
+        # Global rN stack
+        global rN
         # Global CondFlag and ElseFlag
         global condFlag
+        global ifFlag
         global elseFlag
 
         lChild = ctx.getChild(0).getText()
         if lChild == '{' and condFlag:
+            # If it's printing END for ELSE block, insert GOTO first
+            if not ifFlag and not elseFlag:
+                self.insertGOTO(rowNum)
+
             writeStr = str(rowNum) + ' ' + 'END' + '\n'       
             self.appendICode(writeStr)
             rowNum += 1
+            ifFlag = False
+
             # If condFlag and elseFlag are True, generate ELSE
             if condFlag and elseFlag:
                 # Write GOTO
@@ -133,6 +142,10 @@ class DevilsCodeListener(ParseTreeListener):
                 # Write ELSE
                 writeStr = str(rowNum) + ' ' + 'ELSE' + '\n'
                 self.appendICode(writeStr)
+                rowNum += 1
+                # Push the rowNum of ELSE for GOTO
+                rN = gStack.GetRNStack()
+                rN.push(rowNum)
                 rowNum += 1
                 elseFlag = False
         pass
@@ -410,11 +423,13 @@ class DevilsCodeListener(ParseTreeListener):
     def enterIf_stmt(self, ctx):
         # Declare the global row number counter
         global rowNum
-        # Global CondFlag and ElseFlag
+        # Global CondFlag, IfFlag and ElseFlag
         global condFlag
+        global ifFlag
         global elseFlag
 
         condFlag = True
+        ifFlag = True
 
         # If 'else' exists, it should be the 6th child
         elseKey = ctx.getChild(5)
@@ -433,8 +448,9 @@ class DevilsCodeListener(ParseTreeListener):
     def exitIf_stmt(self, ctx):
         # Declare the global row number counter
         global rowNum
-        # Global CondFlag and ElseFlag
+        # Global CondFlag, IfFlag and ElseFlag
         global condFlag
+        global ifFlag
         global elseFlag
 
         rN = gStack.GetRNStack()
@@ -445,6 +461,7 @@ class DevilsCodeListener(ParseTreeListener):
             self.insertGOTO(rowNum - 1)
 
         condFlag = False
+        ifFlag = False
         elseFlag = False
         pass
 
