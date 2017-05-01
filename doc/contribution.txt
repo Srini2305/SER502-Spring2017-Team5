@@ -11,17 +11,29 @@ Mingfei Yang
 /********************************************/
 
 Hari Iyer
-
+1. Assisted with the Grammar rules
+2. Worked on Lexical Analysis
+3. Employed the ANTLR Parser
+4. Parse Tree generation
+5. Present lexical analyzer and parser in demo video
 
 /********************************************/
 
 Pankaj Singh
-
+1. Contributed in Language rules
+2. Involved in design of Intermediate code 
+3. Designed runtime framework for Devilscode 
+4. Implemented runtime design in Java
+5. Present runtime in demo video
 
 /********************************************/
 
 Ting Yeu Yang
-
+1. Main writer for original grammar rules
+2. Support intermediate code generator building
+3. Generate bash scripts
+4. Merge branches, documents, and demo videos
+5. Present introduction and grammar in demo video
 
 /********************************************/
 
@@ -29,5 +41,5 @@ Mingfei Yang
 1. Assist the grammar design
 2. Assist the Antlr Grammar File convertion
 3. Generate the intermediate code
-
+4. Present intermediate code genaration in demo video
 
