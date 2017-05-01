@@ -29,11 +29,11 @@ These tools would be mandatorily needed for the environment to function.
 
 
 ## How to Use
-Get the intermediate code with command: "dvlc <FILE_NAME>"
+Generate intermediate code form the source code
 ```sh
 $ dvlc <FILE_NAME>
 ```
-Run the intermediate code with command: "dvlc-run <FILE_NAME>"
+Run the intermediate code
 ```sh
 $ dvlc-run <FILE_NAME>
 ```
