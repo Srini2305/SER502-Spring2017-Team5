@@ -6,6 +6,36 @@ Systems: Ubuntu 16.04 LTS
 
 Tools to build compiler: Python 3.5.2 and ANTLR 4.7
 
+-𝐀𝐍𝐓𝐋𝐑 𝟒.𝟕 𝐈𝐧𝐬𝐭𝐚𝐥𝐥𝐚𝐭𝐢𝐨𝐧 𝐒𝐭𝐞𝐩𝐬:
+$ cd /usr/local/lib
+
+$ wget http://www.antlr.org/download/antlr-4.7-complete.jar
+
+$ export CLASSPATH=".:/usr/local/lib/antlr-4.7-complete.jar:$CLASSPATH"
+
+$ alias antlr4='java -jar /usr/local/lib/antlr-4.7-complete.jar'
+
+$ alias grun='java org.antlr.v4.gui.TestRig'
+
+-𝐏𝐲𝐭𝐡𝐨𝐧 𝟑.𝟓.𝟐 𝐈𝐧𝐬𝐭𝐚𝐥𝐥𝐚𝐭𝐢𝐨𝐧 𝐒𝐭𝐞𝐩𝐬:
+$ sudo apt-get install build-essential checkinstall
+
+$ sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
+
+$ cd /usr/src
+
+$ wget https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz
+
+$ sudo tar xzf Python-3.5.2.tgz
+
+$ cd Python-3.5.2
+
+$ sudo ./configure
+
+$ sudo make altinstall
+
+These tools would be mandatorily needed for the environment to function.
+
 Tools to build runtime: Jave SE 1.6
 
 ## Installation Instruction
