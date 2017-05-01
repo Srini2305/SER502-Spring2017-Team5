@@ -6,19 +6,14 @@ Systems: Ubuntu 16.04 LTS
 
 Tools to build compiler: Python 3.5.2 and ANTLR 4.7
 
--𝐀𝐍𝐓𝐋𝐑 𝟒.𝟕 𝐈𝐧𝐬𝐭𝐚𝐥𝐥𝐚𝐭𝐢𝐨𝐧 𝐒𝐭𝐞𝐩𝐬:
+Tools to build runtime: Jave SE 1.6
 
-$ cd /usr/local/lib
+## Installation Instruction
+Steps:
 
-$ wget http://www.antlr.org/download/antlr-4.7-complete.jar
+1. Install Python 3.5.2 and Jave SE Runtime 1.6 or above
 
-$ export CLASSPATH=".:/usr/local/lib/antlr-4.7-complete.jar:$CLASSPATH"
-
-$ alias antlr4='java -jar /usr/local/lib/antlr-4.7-complete.jar'
-
-$ alias grun='java org.antlr.v4.gui.TestRig'
-
--𝐏𝐲𝐭𝐡𝐨𝐧 𝟑.𝟓.𝟐 𝐈𝐧𝐬𝐭𝐚𝐥𝐥𝐚𝐭𝐢𝐨𝐧 𝐒𝐭𝐞𝐩𝐬:
+𝐏𝐲𝐭𝐡𝐨𝐧 𝟑.𝟓.𝟐 𝐈𝐧𝐬𝐭𝐚𝐥𝐥𝐚𝐭𝐢𝐨𝐧 𝐒𝐭𝐞𝐩𝐬:
 
 $ sudo apt-get install build-essential checkinstall
 
@@ -37,13 +32,6 @@ $ sudo ./configure
 $ sudo make altinstall
 
 These tools would be mandatorily needed for the environment to function.
-
-Tools to build runtime: Jave SE 1.6
-
-## Installation Instruction
-Steps:
-
-1. Install Python 3.5.2 and Jave SE Runtime 1.6 or above
 
 2. Extract devils.tar.gz to home directory
 
