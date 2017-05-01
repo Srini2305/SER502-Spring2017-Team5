@@ -13,6 +13,10 @@ Steps:
 
 1. Install Python 3.5.2 and Jave SE Runtime 1.6 or above
 
+2. Extract devils.tar.gz to home directory
+
+3. Install the scipts with command: "sh installScript"
+
 𝐏𝐲𝐭𝐡𝐨𝐧 𝟑.𝟓.𝟐 𝐈𝐧𝐬𝐭𝐚𝐥𝐥𝐚𝐭𝐢𝐨𝐧 𝐒𝐭𝐞𝐩𝐬:
 
 $ sudo apt-get install build-essential checkinstall
@@ -33,9 +37,6 @@ $ sudo make altinstall
 
 These tools would be mandatorily needed for the environment to function.
 
-2. Extract devils.tar.gz to home directory
-
-3. Install the scipts with command: "sh installScript"
 
 ## How to Use
 1. Get the intermediate code with command: "dvlc <FILE_NAME>"
