@@ -6,7 +6,7 @@ Tools to build compiler: Python 3.5.2 and ANTLR 4.7
 Tools to build runtime: Jave SE 1.6
 
 ## Installation Instruction
-### DevilsCode Installation Steps:
+### DevilsCode Installation Steps
 
 1. Install Python 3.5.2 and Jave SE Runtime 1.6 or above
 
@@ -14,7 +14,7 @@ Tools to build runtime: Jave SE 1.6
 
 3. Install the scipts with command: "sh installScript"
 
-### 𝐏𝐲𝐭𝐡𝐨𝐧 𝟑.𝟓.𝟐 𝐈𝐧𝐬𝐭𝐚𝐥𝐥𝐚𝐭𝐢𝐨𝐧 𝐒𝐭𝐞𝐩𝐬:
+### Python 3.5.2 Installation Steps
 ```sh
 $ sudo apt-get install build-essential checkinstall
 $ sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
@@ -37,7 +37,7 @@ Run the intermediate code with command: "dvlc-run <FILE_NAME>"
 ```sh
 $ dvlc-run <FILE_NAME>
 ```
-## Bug informaiton:
+## Bug informaiton
 There is a bug in the original ANTLR library, we fixed it and sepearted the custom version into /src/compiler/
 
 In "ParserRuleContext.py" line 116, the if-statment "if len(self.children) >= i" should be "if len(self.children) > i" 
