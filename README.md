@@ -1,9 +1,9 @@
 ## Development Environment
-Systems: Ubuntu 16.04 LTS
+ - Systems: Ubuntu 16.04 LTS
 
-Tools to build compiler: Python 3.5.2 and ANTLR 4.7
+ - Tools to build compiler: Python 3.5.2 and ANTLR 4.7
 
-Tools to build runtime: Jave SE 1.6
+ - Tools to build runtime: Jave SE 1.6
 
 ## Installation Instruction
 ### DevilsCode Installation Steps
