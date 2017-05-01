@@ -12,7 +12,7 @@
 
 2. Download and extract devils.tar.gz to home directory
 
-3. Install the scipts with command
+3. Install the scipts with command:
 ```sh
 $ sh installScript"
 ```
@@ -32,11 +32,11 @@ These tools would be mandatorily needed for the environment to function.
 
 
 ## How to Use
-Generate intermediate code form the source code
+Generate intermediate code form the source code:
 ```sh
 $ dvlc <FILE_NAME>
 ```
-Run the intermediate code
+Run the intermediate code:
 ```sh
 $ dvlc-run <FILE_NAME>
 ```
