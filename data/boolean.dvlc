@@ -1,0 +1,16 @@
+main ()
+{
+	int hours = 48;
+	int days;
+	days = hours / 24;
+	bool multipleDays;
+	if (days > 0)
+	{
+		multipleDays = true;	
+	}
+	else
+	{
+		multipleDays = false;
+	}
+	print multipleDays;
+}
